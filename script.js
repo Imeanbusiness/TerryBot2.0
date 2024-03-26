@@ -4,6 +4,7 @@ feelingsNeg = ["bad","sad","angry","upset","worked up","depressed","hurt","down"
 feelingsGood = ["happy","great","good","well","amazing","cool"]
 feelingsDone = ["that's all", "i'm done","thats all", "im done", "i'm finished", "im finished"]
 openapps = ["open","open up"]
+
 apps = ["google","spotify","youtube","facebook","instagram","x","tiktok","reddit","github","netflix","gmail","office"]
 sites = ["https://www.google.com/", "https://open.spotify.com/","https://www.youtube.com/","https://www.facebook.com/","https://www.instagram.com/","https://twitter.com/","https://www.tiktok.com/","https://www.reddit.com/","https://github.com/","https://www.netflix.com/", "https://www.gmail.com", "https://www.office.com/"]
 const APIkey = "AIzaSyD0nVj7f7BjOr-s3EJc-wdyCChKvWzn-aA"
@@ -12,6 +13,29 @@ function sleep(ms) {
 }
 feelings = "none"
 
+function checksaved() {
+    
+    try {
+        saved = localStorage.getItem("saved");
+        if (saved == "lol") {
+            bgfile = localStorage.getItem("bgfile");
+            document.getElementById("mainbg").style.backgroundImage = "url(\"Images/"+bgfile+"\")";
+        } else {
+            localStorage.setItem("saved","lol")
+            localStorage.setItem("bgfile", "BG.png")
+            console.log(saved)
+        }
+
+    } catch {
+        localStorage.setItem("saved","lol")
+        localStorage.setItem("bgfile", "BG.png")
+        saved = localStorage.getItem("saved");
+        console.log(saved)
+
+    }
+}
+
+window.onload = checksaved()
 
 
 function replywith(x) {
@@ -94,6 +118,13 @@ function command(repl) {
         haha = true
     } else if (repl.includes("kill")) {
         close()
+    } else if (repl.includes("bgc ")) {
+        sit = repl.replace("/bgc ","")
+        localStorage.setItem("bgfile",sit)
+        replywith("Set successfully.")
+        document.getElementById("mainbg").style.backgroundImage = "url(\"Images/"+sit+"\")";
+        haha = true
+    
     } else if (repl.includes("ops ")) {
         
         sit = repl.replace("/ops ","")
@@ -202,12 +233,12 @@ function responses(arr) {
 
 
 function googlesearch(i) {
-    replies = [`I don't know ${i}. I will open Google to try to help you find your answer!`, `I don't know about ${i}. I will open Google to see if that helps!`]
+    replies = [`I will google ${i}. `, `Opening google to find ${i}. `]
     x = randint(1)
     console.log("Should work")
     reply = replies[x]
     replywith(reply)
-    sleep(2500).then(() => {
+    sleep(1000).then(() => {
         window.open("https://www.google.com/search?q="+i)
     });
     
@@ -216,7 +247,10 @@ function googlesearch(i) {
 function respond() {
     ans = document.getElementById("Resp");
     ans = ans.value;
-    ans = ans.toLowerCase();
+    if (!ans.includes("/bgc ")) {
+        ans = ans.toLowerCase();
+    }
+   
     j = false;
     responses(ans);
     
