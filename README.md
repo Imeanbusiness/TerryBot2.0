@@ -4,7 +4,7 @@
 
 ### Installation
 
-1. Click [here](https://github.com/Imeanbusiness/TerryBot2.0/archive/refs/tags/Beta.1.0.zip) to download.
+1. Click [here](https://github.com/Imeanbusiness/TerryBot2.0/archive/refs/tags/Beta.1.0.1.zip) to download.
 
 2. Unzip the folder
 
@@ -30,7 +30,11 @@ You can ask Terry to open up sites for you, or google search if it's something h
 
 ### Commands
 
-You can run commands on Terry to make him work specifically.
+You can run commands on Terry to make him work specifically. Run /help to check.
+
+### Background Customization
+
+To customize your background, drag the desired background image and put it in the images file. Then boot up Terry, and run /bgc (filename). The file name should be BG.png and not Images/BG.png unless you made a folder inside the images folder.
 
 ## Why TerryBot?
 
